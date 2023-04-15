@@ -1,0 +1,13 @@
+#!/bin/bash
+
+set -ex
+
+go mod vendor
+
+mv go.mod go.mod.back
+mv go.sum go.sum.back
+
+GOPATH="$GOPATH:$GOPATH/src/experimental/package" go build -o ./bin/main src/cmd/*.go
+
+mv go.sum.back go.sum
+mv go.mod.back go.mod
